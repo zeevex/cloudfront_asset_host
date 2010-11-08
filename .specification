@@ -1,0 +1,192 @@
+--- !ruby/object:Gem::Specification 
+name: zeevex-cloudfront_asset_host
+version: !ruby/object:Gem::Version 
+  hash: 19
+  prerelease: false
+  segments: 
+  - 1
+  - 1
+  - 0
+  version: 1.1.0
+platform: ruby
+authors: 
+- Menno van der Sman
+autorequire: 
+bindir: bin
+cert_chain: []
+
+date: 2010-10-01 00:00:00 -04:00
+default_executable: 
+dependencies: 
+- !ruby/object:Gem::Dependency 
+  name: right_aws
+  prerelease: false
+  requirement: &id001 !ruby/object:Gem::Requirement 
+    none: false
+    requirements: 
+    - - ">="
+      - !ruby/object:Gem::Version 
+        hash: 3
+        segments: 
+        - 0
+        version: "0"
+  type: :runtime
+  version_requirements: *id001
+- !ruby/object:Gem::Dependency 
+  name: activesupport
+  prerelease: false
+  requirement: &id002 !ruby/object:Gem::Requirement 
+    none: false
+    requirements: 
+    - - "="
+      - !ruby/object:Gem::Version 
+        hash: 17
+        segments: 
+        - 2
+        - 3
+        - 9
+        version: 2.3.9
+  type: :development
+  version_requirements: *id002
+- !ruby/object:Gem::Dependency 
+  name: actionpack
+  prerelease: false
+  requirement: &id003 !ruby/object:Gem::Requirement 
+    none: false
+    requirements: 
+    - - "="
+      - !ruby/object:Gem::Version 
+        hash: 17
+        segments: 
+        - 2
+        - 3
+        - 9
+        version: 2.3.9
+  type: :development
+  version_requirements: *id003
+- !ruby/object:Gem::Dependency 
+  name: shoulda
+  prerelease: false
+  requirement: &id004 !ruby/object:Gem::Requirement 
+    none: false
+    requirements: 
+    - - ">="
+      - !ruby/object:Gem::Version 
+        hash: 3
+        segments: 
+        - 0
+        version: "0"
+  type: :development
+  version_requirements: *id004
+- !ruby/object:Gem::Dependency 
+  name: mocha
+  prerelease: false
+  requirement: &id005 !ruby/object:Gem::Requirement 
+    none: false
+    requirements: 
+    - - ">="
+      - !ruby/object:Gem::Version 
+        hash: 3
+        segments: 
+        - 0
+        version: "0"
+  type: :development
+  version_requirements: *id005
+- !ruby/object:Gem::Dependency 
+  name: redgreen
+  prerelease: false
+  requirement: &id006 !ruby/object:Gem::Requirement 
+    none: false
+    requirements: 
+    - - ">="
+      - !ruby/object:Gem::Version 
+        hash: 3
+        segments: 
+        - 0
+        version: "0"
+  type: :development
+  version_requirements: *id006
+- !ruby/object:Gem::Dependency 
+  name: turn
+  prerelease: false
+  requirement: &id007 !ruby/object:Gem::Requirement 
+    none: false
+    requirements: 
+    - - ">="
+      - !ruby/object:Gem::Version 
+        hash: 3
+        segments: 
+        - 0
+        version: "0"
+  type: :development
+  version_requirements: *id007
+description: Easy deployment of your assets on CloudFront or S3 using a simple rake-task. When enabled in production, the application's asset_host and public_paths will point to the correct location.
+email: menno@wakoopa.com
+executables: []
+
+extensions: []
+
+extra_rdoc_files: 
+- README.markdown
+files: 
+- .gitignore
+- Gemfile
+- Gemfile.lock
+- MIT-LICENSE
+- README.markdown
+- Rakefile
+- VERSION
+- cloudfront_asset_host.gemspec
+- lib/cloudfront_asset_host.rb
+- lib/cloudfront_asset_host/asset_tag_helper_ext.rb
+- lib/cloudfront_asset_host/css_rewriter.rb
+- lib/cloudfront_asset_host/mime_types.yml
+- lib/cloudfront_asset_host/uploader.rb
+- test/app/config/s3-env.yml
+- test/app/config/s3.yml
+- test/app/public/images/image.png
+- test/app/public/javascripts/application.js
+- test/app/public/stylesheets/style.css
+- test/cloudfront_asset_host_test.rb
+- test/css_rewriter_test.rb
+- test/test_helper.rb
+- test/uploader_test.rb
+has_rdoc: true
+homepage: http://github.com/menno/cloudfront_asset_host
+licenses: []
+
+post_install_message: 
+rdoc_options: 
+- --charset=UTF-8
+require_paths: 
+- lib
+required_ruby_version: !ruby/object:Gem::Requirement 
+  none: false
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      hash: 3
+      segments: 
+      - 0
+      version: "0"
+required_rubygems_version: !ruby/object:Gem::Requirement 
+  none: false
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      hash: 3
+      segments: 
+      - 0
+      version: "0"
+requirements: []
+
+rubyforge_project: 
+rubygems_version: 1.3.7
+signing_key: 
+specification_version: 3
+summary: Rails plugin to easily and efficiently deploy your assets on Amazon's S3 or CloudFront
+test_files: 
+- test/cloudfront_asset_host_test.rb
+- test/css_rewriter_test.rb
+- test/test_helper.rb
+- test/uploader_test.rb
