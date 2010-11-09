@@ -149,3 +149,12 @@
  - php
  - config
  - txt
+"application/vnd.ms-fontobject":
+ - eot
+"font/woff":
+ - woff
+"font/truetype":
+ - ttf
+"font/opentype":
+ - otf
+ 
