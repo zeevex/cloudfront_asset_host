@@ -108,15 +108,17 @@ class CloudfrontAssetHostTest < Test::Unit::TestCase
       end
     end
 
-    should "set the asset_host" do
-      assert ActionController::Base.asset_host.is_a?(Proc)
+    should "not set the asset_host" do
+      assert !ActionController::Base.asset_host.is_a?(Proc)
     end
 
     should "alias methods in asset-tag-helper" do
       assert ActionView::Helpers::AssetTagHelper.private_method_defined?('rails_asset_id_without_cloudfront')
       assert ActionView::Helpers::AssetTagHelper.private_method_defined?('rewrite_asset_path_without_cloudfront')
+      assert ActionView::Helpers::AssetTagHelper.private_method_defined?('compute_asset_host_without_cloudfront')
       assert ActionView::Helpers::AssetTagHelper.private_method_defined?('rails_asset_id')
       assert ActionView::Helpers::AssetTagHelper.private_method_defined?('rewrite_asset_path')
+      assert ActionView::Helpers::AssetTagHelper.private_method_defined?('compute_asset_host')
     end
   end
 
