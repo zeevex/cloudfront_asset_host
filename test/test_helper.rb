@@ -2,7 +2,11 @@ require 'rubygems'
 require 'bundler'
 Bundler.setup
 
-$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
+# get ref to test dir and then move to parent dir
+testdir = File.expand_path(File.dirname(__FILE__))
+Dir.chdir File.join(testdir, "..")
+
+$LOAD_PATH.unshift(File.join(testdir, '..', 'lib'))
 
 require 'active_support'
 require 'action_controller'
@@ -13,7 +17,7 @@ require 'mocha'
 begin require 'redgreen'; rescue LoadError; end
 begin require 'turn'; rescue LoadError; end
 
-RAILS_ROOT = File.expand_path(File.join(File.dirname(__FILE__), 'app'))
+RAILS_ROOT = File.expand_path(File.join(testdir, 'app'))
 
 class NullBacktraceCleaner
   def clean(x); x; end
@@ -41,4 +45,4 @@ module Rails
   end
 end
 
-require File.join(File.dirname(__FILE__), '..', 'lib', 'cloudfront_asset_host')
+require File.join(testdir, '..', 'lib', 'cloudfront_asset_host')
