@@ -130,7 +130,7 @@ class UploaderTest < Test::Unit::TestCase
       css_path = CloudfrontAssetHost::Uploader.rewritten_css_path(path)
 
       File.read(css_path).split("\n").each do |line|
-        assert_equal "body { background-image: url(http://assethost.com/d41d8cd98/images/image.png); }", line
+        assert_match Regexp.new('^body \{ background: url\(http://assethost.com/d41d8cd98/images/image.png\) repeat-x;.*\}'), line
       end
     end
 
