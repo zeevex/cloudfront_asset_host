@@ -5,7 +5,7 @@ module ActionView
     private
 
       def compute_asset_host_with_cloudfront(source)
-        if CloudfrontAssetHost.disable_cdn_for_source?(source)
+        if !CloudfrontAssetHost.enabled || CloudfrontAssetHost.disable_cdn_for_source?(source)
           compute_asset_host_without_cloudfront(source)
         else
           request = controller.respond_to?(:request) && controller.request
@@ -14,7 +14,7 @@ module ActionView
       end
 
       def rewrite_host_and_protocol_with_cloudfront(source, has_request)
-        if CloudfrontAssetHost.disable_cdn_for_source?(source)
+        if !CloudfrontAssetHost.enabled || CloudfrontAssetHost.disable_cdn_for_source?(source)
           rewrite_host_and_protocol_without_cloudfront(source, has_request)
         else
           host = CloudfrontAssetHost.asset_host(source, has_request)
@@ -27,7 +27,7 @@ module ActionView
 
       # Override asset_id so it calculates the key by md5 instead of modified-time
       def rails_asset_id_with_cloudfront(source)
-        if CloudfrontAssetHost.disable_cdn_for_source?(source)
+        if !CloudfrontAssetHost.enabled || CloudfrontAssetHost.disable_cdn_for_source?(source)
           return rails_asset_id_without_cloudfront(source)
         end
 
@@ -50,7 +50,7 @@ module ActionView
 
       # Override asset_path so it prepends the asset_id
       def rewrite_asset_path_with_cloudfront(source)
-        if CloudfrontAssetHost.disable_cdn_for_source?(source)
+        if !CloudfrontAssetHost.enabled || CloudfrontAssetHost.disable_cdn_for_source?(source)
           rewrite_asset_path_without_cloudfront(source)
         else
           asset_id = rails_asset_id_with_cloudfront(source)
