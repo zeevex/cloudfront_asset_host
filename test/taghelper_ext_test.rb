@@ -19,6 +19,16 @@ class TagHelperExtTest < ActionView::TestCase
     !! tag.match(CF_TAG_PATTERN)
   end
   
+  def shared_teardown
+    ActionView::Helpers::AssetTagHelper.class_eval do
+      @@asset_timestamps_cache = {}
+    end
+    ['javascripts/all.js', 'stylesheets/all.css'].each do |name|
+      file = File.join(Rails.public_path, name) 
+      File.delete(file) if File.exist?(file)
+    end
+  end
+  
   context "A configured uploader with no exclusions" do
     setup do
       CloudfrontAssetHost.configure do |config|
@@ -33,10 +43,7 @@ class TagHelperExtTest < ActionView::TestCase
 
       
     teardown do
-      ['javascripts/all.js', 'stylesheets/all.css'].each do |name|
-        file = File.join(Rails.public_path, name) 
-        File.delete(file) if File.exist?(file)
-      end
+      shared_teardown
     end
 
     should "use assethost for included asset path of image" do
@@ -44,7 +51,7 @@ class TagHelperExtTest < ActionView::TestCase
     end
 
     should "use assethost for included asset path of stylesheet" do
-      assert_equal "http://assethost.com/1289312826/stylesheets/style.css", stylesheet_path("style.css")
+      assert_equal "http://assethost.com/ad8b295cb/stylesheets/style.css", stylesheet_path("style.css")
     end
 
     should "use cloudfront javascript paths if :cache is NOT true" do
@@ -77,10 +84,7 @@ class TagHelperExtTest < ActionView::TestCase
     end
       
     teardown do
-      ['javascripts/all.js', 'stylesheets/all.css'].each do |name|
-        file = File.join(Rails.public_path, name) 
-        File.delete(file) if File.exist?(file)
-      end
+      shared_teardown
     end
 
     should "allow standard Rails path generation for an excluded asset" do
