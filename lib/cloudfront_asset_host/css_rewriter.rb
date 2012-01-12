@@ -29,7 +29,7 @@ module CloudfrontAssetHost
 
       def rewrite_asset_link(asset_link, stylesheet_path)
         url = asset_link.match(ReplaceRexeg)[1]
-        if url
+        if url && !(asset_link =~ CloudfrontAssetHost.exclude_pattern)
           path = path_for_url(url, stylesheet_path)
 
           if path.present? && File.exists?(path)
