@@ -110,7 +110,6 @@ module CloudfrontAssetHost
         headers = {
           'Content-Type' => mime,
           'Cache-Control' => "max-age=#{10.years.to_i}",
-          'Expires' => 1.year.from_now.utc.to_s
         }
         headers['Content-Encoding'] = 'gzip' if gzip
 
