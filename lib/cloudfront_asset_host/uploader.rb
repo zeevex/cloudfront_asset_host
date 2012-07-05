@@ -135,7 +135,7 @@ module CloudfrontAssetHost
 
       def config
         @config ||= begin 
-          config = YAML::load_file(CloudfrontAssetHost.s3_config)
+          config = YAML::load(ERB.new(IO.read(CloudfrontAssetHost.s3_config)).result)
           config.has_key?(Rails.env) ? config[Rails.env] : config
         end
       end
