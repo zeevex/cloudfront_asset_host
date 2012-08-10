@@ -108,10 +108,10 @@ module CloudfrontAssetHost
       def headers_for_path(extension, gzip = false)
         mime = ext_to_mime[extension] || 'application/octet-stream'
         headers = {
-          'Content-Type' => mime,
-          'Cache-Control' => "max-age=#{10.years.to_i}",
+          'content-type' => mime,
+          'cache-control' => "max-age=#{10.years.to_i}",
         }
-        headers['Content-Encoding'] = 'gzip' if gzip
+        headers['content-encoding'] = 'gzip' if gzip
 
         headers
       end
