@@ -2,6 +2,27 @@ module ActionView
    module Helpers
      module AssetTagHelper
 
+     
+     def javascript_include_tag_with_cloudfront(*sources)
+       if sources.last.is_a?(::Hash) && (sources.last[:cache] || sources.last[:recursive])
+         without_cloudfront do
+           javascript_include_tag_without_cloudfront(*sources)
+         end
+       else
+           javascript_include_tag_without_cloudfront(*sources)
+       end
+     end
+     
+     def stylesheet_link_tag_with_cloudfront(*sources)
+       if sources.last.is_a?(::Hash) && (sources.last[:cache] || sources.last[:recursive])
+         without_cloudfront do
+           stylesheet_link_tag_without_cloudfront(*sources)
+         end
+       else
+           stylesheet_link_tag_without_cloudfront(*sources)
+       end
+     end
+
     private
 
       def compute_asset_host_with_cloudfront(source)
@@ -61,7 +82,25 @@ module ActionView
           end
         end
       end
-
+     
+     def compute_public_path_with_cloudfront(source, dir, ext = nil, include_host = true)   
+       if source =~ %r{^([-a-z]+:)?//}
+         return source
+       else
+         compute_public_path_without_cloudfront(source, dir, ext, include_host)
+       end
      end
+     
+     def without_cloudfront
+       begin
+         old = CloudfrontAssetHost.enabled
+         CloudfrontAssetHost.enabled = false
+         yield
+       ensure
+         CloudfrontAssetHost.enabled = old
+       end
+     end
+
+   end
    end
 end

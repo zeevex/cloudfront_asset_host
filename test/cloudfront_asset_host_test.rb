@@ -15,6 +15,9 @@ class CloudfrontAssetHostTest < Test::Unit::TestCase
     should "add methods to asset-tag-helper" do
       assert ActionView::Helpers::AssetTagHelper.private_method_defined?('rails_asset_id_with_cloudfront')
       assert ActionView::Helpers::AssetTagHelper.private_method_defined?('rewrite_asset_path_with_cloudfront')
+      assert ActionView::Helpers::AssetTagHelper.private_method_defined?('compute_asset_host_with_cloudfront')
+      assert ActionView::Helpers::AssetTagHelper.public_method_defined?('stylesheet_link_tag_with_cloudfront')
+      assert ActionView::Helpers::AssetTagHelper.public_method_defined?('javascript_include_tag_with_cloudfront')
     end
 
     should "not enable itself by default" do

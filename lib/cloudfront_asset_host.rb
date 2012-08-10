@@ -117,6 +117,9 @@ module CloudfrontAssetHost
         ActionView::Helpers::AssetTagHelper.send(:alias_method_chain, :rewrite_asset_path, :cloudfront)
         ActionView::Helpers::AssetTagHelper.send(:alias_method_chain, :rails_asset_id, :cloudfront)
         ActionView::Helpers::AssetTagHelper.send(:alias_method_chain, :compute_asset_host, :cloudfront)
+        ActionView::Helpers::AssetTagHelper.send(:alias_method_chain, :compute_public_path, :cloudfront)
+        ActionView::Helpers::AssetTagHelper.send(:alias_method_chain, :stylesheet_link_tag, :cloudfront)
+        ActionView::Helpers::AssetTagHelper.send(:alias_method_chain, :javascript_include_tag, :cloudfront)
       end
     end
 

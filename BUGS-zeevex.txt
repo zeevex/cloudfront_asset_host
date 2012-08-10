@@ -1,0 +1,32 @@
+In Zeevex forked version.
+
+**** Stylesheet link tag :cache does not work - 2010-11-17
+
+   if a construct like this is used:
+
+    <%= stylesheet_link_tag "foo", "bar", :cache => true %>
+
+  Rails will likely throw an error like this:
+
+    Errno::ENOENT: No such file or directory - /zeevex/sites/testengine/releases/20101117175544/public/testing/805270d93/stylesheets/web_app_theme.css 1 minute ago
+test/purchases#index
+
+  Backtrace:
+
+  [GEM_ROOT]/gems/actionpack-2.3.10/lib/action_view/helpers/asset_tag_helper.rb:668:in `read'
+
+[GEM_ROOT]/gems/actionpack-2.3.10/lib/action_view/helpers/asset_tag_helper.rb:668:in `join_asset_file_contents'
+
+[GEM_ROOT]/gems/actionpack-2.3.10/lib/action_view/helpers/asset_tag_helper.rb:668:in `collect'
+
+[GEM_ROOT]/gems/actionpack-2.3.10/lib/action_view/helpers/asset_tag_helper.rb:668:in `join_asset_file_contents'
+
+[GEM_ROOT]/gems/actionpack-2.3.10/lib/action_view/helpers/asset_tag_helper.rb:673:in `write_asset_file_contents'
+
+[GEM_ROOT]/gems/actionpack-2.3.10/lib/action_view/helpers/asset_tag_helper.rb:673:in `open'
+
+[GEM_ROOT]/gems/actionpack-2.3.10/lib/action_view/helpers/asset_tag_helper.rb:673:in `write_asset_file_contents'
+
+[GEM_ROOT]/gems/actionpack-2.3.10/lib/action_view/helpers/asset_tag_helper.rb:433:in `stylesheet_link_tag'
+
+
