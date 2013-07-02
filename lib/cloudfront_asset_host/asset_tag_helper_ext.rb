@@ -47,15 +47,15 @@ module ActionView
       end
 
       # Override asset_id so it calculates the key by md5 instead of modified-time
-      def rails_asset_id_with_cloudfront(source)
+      def rails_asset_id_with_cloudfront(source, *rails3args)
         if !CloudfrontAssetHost.enabled || CloudfrontAssetHost.disable_cdn_for_source?(source)
-          return rails_asset_id_without_cloudfront(source)
+          return rails_asset_id_without_cloudfront(source, *rails3args)
         end
 
         if @@cache_asset_timestamps && (asset_id = @@asset_timestamps_cache[source])
           asset_id
         else
-          path = File.join(ASSETS_DIR, source)
+          path = File.join(Rails.configuration.assets_dir, source)
           rewrite_path = File.exist?(path) && !CloudfrontAssetHost.disable_cdn_for_source?(source)
           asset_id = rewrite_path ? CloudfrontAssetHost.key_for_path(path) : ''
 
@@ -70,11 +70,11 @@ module ActionView
       end
 
       # Override asset_path so it prepends the asset_id
-      def rewrite_asset_path_with_cloudfront(source)
+      def rewrite_asset_path_with_cloudfront(source, *rails3args)
         if !CloudfrontAssetHost.enabled || CloudfrontAssetHost.disable_cdn_for_source?(source)
-          rewrite_asset_path_without_cloudfront(source)
+          rewrite_asset_path_without_cloudfront(source, *rails3args)
         else
-          asset_id = rails_asset_id_with_cloudfront(source)
+          asset_id = rails_asset_id_with_cloudfront(source, *rails3args)
           if asset_id.blank?
             source
           else
